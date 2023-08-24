@@ -19,6 +19,7 @@
 /// // Functions:
 /// setupAudio() -> Aplica configurações para tratarmos os dados do audio.
 /// startRecording() -> instala o "tap" responsável por gravar e monitorar os dados do audio e da inicia o gravação.
+///     Captamos os dados da gravação, com o "tap",e conseguimos manipula-la com o buffer.
 /// saveJson() -> salvo alguns dados no json para validar.
 //  Created by Joao Guilherme Araujo Canuto on 21/08/23.
 //

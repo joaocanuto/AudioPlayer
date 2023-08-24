@@ -31,6 +31,7 @@
 // Functions:
 /// setupAudio() -> Aplica configurações para tratarmos os dados do audio.
 /// play() -> instala o "tap" responsável por monitorar os dados do audio e da inicia o player.
+///     Captamos os dados do arquivo, com o "tap",e conseguimos manipula-la com o buffer
 /// saveJson() -> salvo alguns dados no json para validar.
 ///
 ///
