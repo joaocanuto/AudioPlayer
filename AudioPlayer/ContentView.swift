@@ -6,16 +6,28 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct ContentView: View {
+//    @StateObject var audioPlayer = AudioPlayer()
+    @State var analiseAudio = AnaliseAudio()
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            NavigationView {
+                VStack{
+                    NavigationLink(destination: AudioPlayerView(analiseAudio:analiseAudio), label:  {Text("Audio Player")})
+                    NavigationLink(destination: AudioRecorderView(analiseAudio: analiseAudio), label:  {Text("Audio Recorder")})
+                    NavigationLink(destination: AudioRecPlayView(), label:  {Text("Audio Recorder e Player")})
+                }
+            }
+
+            Button {
+                analiseAudio.analise()
+            } label: {
+                Text("Analise Audio!!")
+            }
+
         }
-        .padding()
     }
 }
 
