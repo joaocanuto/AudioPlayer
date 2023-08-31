@@ -13,5 +13,5 @@ struct Constants {
     static let bufferSize = 4096
     static let channels = 1
     static let commomFormat = AVAudioCommonFormat.pcmFormatFloat32
-    static let sampleRate: Double = 44100.0
+    static let sampleRate: Double = 48000.0
 }

@@ -72,11 +72,10 @@ class AudioRecorder : ObservableObject {
         }
     }
     func setupAudio(){
-        //SESSION SETUP
         
         let session = AVAudioSession.sharedInstance()
         do {
-            try session.setCategory(.record,mode: .measurement,options: .allowBluetooth)
+            try session.setCategory(.playAndRecord,mode: .measurement,options: .allowBluetooth)
         } catch { print("Failed to set audioSession category.") }
         
         //ATTACH
