@@ -29,6 +29,7 @@ import AVFAudio
 
 
 class AudioRecorder : ObservableObject {
+    
     var engine: AVAudioEngine!
     //Nodes
     private var mic: AVAudioInputNode
@@ -88,7 +89,7 @@ class AudioRecorder : ObservableObject {
         let micFormat = mic.inputFormat(forBus: 0)
         let mixerOutputFormat = AVAudioFormat(
             commonFormat: Constants.commomFormat,
-            sampleRate: Constants.sampleRate,
+            sampleRate: micFormat.sampleRate,
             channels: AVAudioChannelCount(Constants.channels),
             interleaved: false
         )
@@ -108,7 +109,7 @@ class AudioRecorder : ObservableObject {
                          format: nil)
         { buffer, time in
             if(!buffer.array().first!.isEqual(to: 0.0)) {
-        
+                print("Hello")
                 let instantaneousDBA = buffer
                     .array()
                     .applyFilter(.audible)

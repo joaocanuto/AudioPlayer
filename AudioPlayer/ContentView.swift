@@ -15,9 +15,10 @@ struct ContentView: View {
         VStack {
             NavigationView {
                 VStack{
-                    NavigationLink(destination: AudioPlayerView(analiseAudio:analiseAudio), label:  {Text("Audio Player")})
+//                    NavigationLink(destination: AudioPlayerView(analiseAudio:analiseAudio), label:  {Text("Audio Player")})
                     NavigationLink(destination: AudioRecorderView(analiseAudio: analiseAudio), label:  {Text("Audio Recorder")})
                     NavigationLink(destination: AudioRecPlayView(), label:  {Text("Audio Recorder e Player")})
+                    NavigationLink(destination: AudioListView(), label:  {Text("Lista de Audios")})
                 }
             }
 

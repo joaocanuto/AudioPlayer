@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF08515F2AA68F2F004E2299 /* AudioListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF08515E2AA68F2F004E2299 /* AudioListView.swift */; };
+		EF0851612AA68F3F004E2299 /* AudioListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0851602AA68F3F004E2299 /* AudioListViewModel.swift */; };
+		EF0851672AA68F98004E2299 /* AudioDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EF0851652AA68F98004E2299 /* AudioDB.xcdatamodeld */; };
+		EF08516A2AA68FF6004E2299 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF0851692AA68FF6004E2299 /* Persistence.swift */; };
+		EF08516C2AA69021004E2299 /* AudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF08516B2AA69021004E2299 /* AudioModel.swift */; };
+		EF08516F2AA69099004E2299 /* CoredataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF08516E2AA69099004E2299 /* CoredataServices.swift */; };
 		EF99FC3C2A8D7EBF00E5D34B /* AudioPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF99FC3B2A8D7EBF00E5D34B /* AudioPlayerApp.swift */; };
 		EF99FC3E2A8D7EBF00E5D34B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF99FC3D2A8D7EBF00E5D34B /* ContentView.swift */; };
 		EF99FC402A8D7EC000E5D34B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF99FC3F2A8D7EC000E5D34B /* Assets.xcassets */; };
@@ -29,6 +35,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF08515E2AA68F2F004E2299 /* AudioListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListView.swift; sourceTree = "<group>"; };
+		EF0851602AA68F3F004E2299 /* AudioListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioListViewModel.swift; sourceTree = "<group>"; };
+		EF0851662AA68F98004E2299 /* AudioDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AudioDB.xcdatamodel; sourceTree = "<group>"; };
+		EF0851692AA68FF6004E2299 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		EF08516B2AA69021004E2299 /* AudioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioModel.swift; sourceTree = "<group>"; };
+		EF08516E2AA69099004E2299 /* CoredataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoredataServices.swift; sourceTree = "<group>"; };
 		EF99FC382A8D7EBF00E5D34B /* AudioPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF99FC3B2A8D7EBF00E5D34B /* AudioPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerApp.swift; sourceTree = "<group>"; };
 		EF99FC3D2A8D7EBF00E5D34B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,9 +74,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF0851682AA68FEB004E2299 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EF0851692AA68FF6004E2299 /* Persistence.swift */,
+				EF08516B2AA69021004E2299 /* AudioModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EF08516D2AA69089004E2299 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EF08516E2AA69099004E2299 /* CoredataServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		EF99FC2F2A8D7EBF00E5D34B = {
 			isa = PBXGroup;
 			children = (
+				EF0851652AA68F98004E2299 /* AudioDB.xcdatamodeld */,
 				EF99FC3A2A8D7EBF00E5D34B /* AudioPlayer */,
 				EF99FC392A8D7EBF00E5D34B /* Products */,
 			);
@@ -81,6 +111,8 @@
 		EF99FC3A2A8D7EBF00E5D34B /* AudioPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				EF08516D2AA69089004E2299 /* Services */,
+				EF0851682AA68FEB004E2299 /* Model */,
 				EF99FC3B2A8D7EBF00E5D34B /* AudioPlayerApp.swift */,
 				EFE9FEEA2A8EF2DF009B1282 /* View */,
 				EFE9FEFE2A94233E009B1282 /* Utils */,
@@ -111,6 +143,7 @@
 				EFE9FEFA2A94213A009B1282 /* AudioRecorder.swift */,
 				EFE9FEF82A942130009B1282 /* AudioPlayer.swift */,
 				EFE9FEEB2A8EF2FA009B1282 /* AudioRecPlay.swift */,
+				EF0851602AA68F3F004E2299 /* AudioListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -120,6 +153,7 @@
 			children = (
 				EFE9FEE52A8EE8DF009B1282 /* AudioRecorderView.swift */,
 				EFE9FEE32A8EE8D2009B1282 /* AudioPlayerView.swift */,
+				EF08515E2AA68F2F004E2299 /* AudioListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -212,9 +246,14 @@
 			files = (
 				EFE9FEFB2A94213A009B1282 /* AudioRecorder.swift in Sources */,
 				EFE9FF002A942362009B1282 /* helpers.swift in Sources */,
+				EF08516A2AA68FF6004E2299 /* Persistence.swift in Sources */,
+				EF0851612AA68F3F004E2299 /* AudioListViewModel.swift in Sources */,
 				EFE9FEFD2A942194009B1282 /* AudioSave.swift in Sources */,
+				EF0851672AA68F98004E2299 /* AudioDB.xcdatamodeld in Sources */,
 				EF99FC3E2A8D7EBF00E5D34B /* ContentView.swift in Sources */,
 				EFE9FEEE2A90249A009B1282 /* ACSignal.swift in Sources */,
+				EF08516C2AA69021004E2299 /* AudioModel.swift in Sources */,
+				EF08515F2AA68F2F004E2299 /* AudioListView.swift in Sources */,
 				EFE9FEF92A942130009B1282 /* AudioPlayer.swift in Sources */,
 				EF99FC3C2A8D7EBF00E5D34B /* AudioPlayerApp.swift in Sources */,
 				EFE9FEE82A8EF20E009B1282 /* AudioRecPlayView.swift in Sources */,
@@ -223,6 +262,7 @@
 				EFE9FEE62A8EE8DF009B1282 /* AudioRecorderView.swift in Sources */,
 				EFE9FEEC2A8EF2FA009B1282 /* AudioRecPlay.swift in Sources */,
 				EFE9FF042A942647009B1282 /* Constants.swift in Sources */,
+				EF08516F2AA69099004E2299 /* CoredataServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +465,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EF0851652AA68F98004E2299 /* AudioDB.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EF0851662AA68F98004E2299 /* AudioDB.xcdatamodel */,
+			);
+			currentVersion = EF0851662AA68F98004E2299 /* AudioDB.xcdatamodel */;
+			path = AudioDB.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = EF99FC302A8D7EBF00E5D34B /* Project object */;
 }

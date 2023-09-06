@@ -43,6 +43,8 @@ import AVFAudio
 
 
 class AudioPlayer{
+    var audioUrl : String
+    
     var engine: AVAudioEngine!
     //Nodes
     private let player:AVAudioPlayerNode
@@ -68,13 +70,13 @@ class AudioPlayer{
     //Files
     private var audioFile:AVAudioFile?
 
-    init(analiseAudio: AnaliseAudio){
+    init(analiseAudio: AnaliseAudio, audioUrl: String){
+        self.audioUrl = audioUrl
         self.analiseAudio = analiseAudio
         self.engine = AVAudioEngine()
         self.player = AVAudioPlayerNode()
         self.mixer = AVAudioMixerNode()
         self.delay = AVAudioUnitDelay()
-        setupAudio()
     }
     
     private func startEngine() {
@@ -92,11 +94,12 @@ class AudioPlayer{
     
     func setupAudio(){
         //SESSION SETUP
-        
-        let session = AVAudioSession.sharedInstance()
-        do {
-            try session.setCategory(.playAndRecord,mode: .measurement,options: .allowBluetooth)
-        } catch { print("Failed to set audioSession category.") }
+//        
+//        let session = AVAudioSession.sharedInstance()
+//        do {
+//            try session.setCategory(.playAndRecord,mode: .measurement,options: .allowBluetooth)
+//        } catch { print("Failed to set audioSession category.") }
+//
         
         //ATTACH
         engine.attach(player)
@@ -107,7 +110,7 @@ class AudioPlayer{
         let playerOutputFormat = player.outputFormat(forBus: 0)
         let mixerOutputFormat = AVAudioFormat(
             commonFormat: Constants.commomFormat,
-            sampleRate: Constants.sampleRate,
+            sampleRate: playerOutputFormat.sampleRate,
             channels: AVAudioChannelCount(Constants.channels),
             interleaved: false
         )
@@ -125,17 +128,21 @@ class AudioPlayer{
         delay.wetDryMix = 100
         
         //SCHEDULEFILE
-        var selectedSongURL = Bundle.main.url(forResource: "intro4", withExtension: "wav")
+        //var selectedSongURL = Bundle.main.url(forResource: "intro4", withExtension: "wav")
+        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        var url = documentURL.appendingPathComponent(audioUrl)
+        //guard let selectedSongURL = URL(string: url) else {return}
         do {
-            let audioFile = try AVAudioFile(forReading: selectedSongURL!)
+            let audioFile = try AVAudioFile(forReading: url)
             player.scheduleFile(audioFile, at: nil, completionHandler: nil)
         } catch {
-            print(error)
+            print(error.localizedDescription)
         }
 
     }
     
     func play(){
+        setupAudio()
         self.avgDBA?( 0 )
         self.instantaneousDBA?(0)
         self.maxDBA?(0)
@@ -155,6 +162,7 @@ class AudioPlayer{
                          format: nil)
         { [self] buffer, time in
             if(!buffer.array().first!.isEqual(to: 0.0)) {
+                print("Hello")
                 let instantaneousDBA = buffer
                     .array()
                     .applyFilter(.audible)

@@ -10,10 +10,12 @@ import SwiftUI
 struct AudioPlayerView: View {
     @State var audioPlayer: AudioPlayer
     var analiseAudio:AnaliseAudio
+    var audioUrl: String
     
-    init(analiseAudio: AnaliseAudio){
+    init(analiseAudio: AnaliseAudio, url: String){
+        self.audioUrl = url
         self.analiseAudio = analiseAudio
-        self.audioPlayer = AudioPlayer(analiseAudio: analiseAudio)
+        self.audioPlayer = AudioPlayer(analiseAudio: analiseAudio, audioUrl : url)
     }
     
     var body: some View {

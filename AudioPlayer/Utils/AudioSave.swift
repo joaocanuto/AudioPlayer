@@ -9,15 +9,22 @@ import Foundation
 import AVFAudio
 
 class AudioSave {
+    var service: CoredataServices = CoredataServices()
+    
     func saveRec(samples: [Float], mixer: AVAudioMixerNode,jsonArray: [[String: Any]]){
         var audioFile:AVAudioFile?
         //Saving Audio
         let audioFormat = mixer.outputFormat(forBus: 0)
         let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let audioTitle = "recording\(UUID()).wav"
+        var url = documentURL.appendingPathComponent(audioTitle)
         do {
-            let file = try AVAudioFile(forWriting: documentURL.appendingPathComponent("recording\(UUID()).wav"), settings: mixer.outputFormat(forBus: 0).settings)
+            let file = try AVAudioFile(forWriting:url, settings: mixer.outputFormat(forBus: 0).settings)
             do {
                 try file.write(from: samples.convertToPCMBuffer(for: audioFormat)!)
+                print(url)
+                print(url.absoluteString)
+                service.createAudio(url: audioTitle)
             } catch {
                 print(error)
             }
