@@ -40,7 +40,8 @@
 
 import Foundation
 import AVFAudio
-
+import AVFoundation
+import UIKit
 
 class AudioPlayer{
     var audioUrl : String
@@ -54,6 +55,7 @@ class AudioPlayer{
     
     //Data
     var samples: [Float] = []
+    var samples2: [Float] = []
     private var jsonArray:[[String:Any]] = []
     private var jsonBuffer:[Float] = []
     //Mesuarement
@@ -100,7 +102,6 @@ class AudioPlayer{
 //            try session.setCategory(.playAndRecord,mode: .measurement,options: .allowBluetooth)
 //        } catch { print("Failed to set audioSession category.") }
 //
-        
         //ATTACH
         engine.attach(player)
         engine.attach(mixer)
@@ -129,15 +130,28 @@ class AudioPlayer{
         
         //SCHEDULEFILE
         //var selectedSongURL = Bundle.main.url(forResource: "intro4", withExtension: "wav")
-        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        var url = documentURL.appendingPathComponent(audioUrl)
-        //guard let selectedSongURL = URL(string: url) else {return}
-        do {
-            let audioFile = try AVAudioFile(forReading: url)
-            player.scheduleFile(audioFile, at: nil, completionHandler: nil)
-        } catch {
-            print(error.localizedDescription)
-        }
+//        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//        var url = documentURL.appendingPathComponent(audioUrl)
+//        //guard let selectedSongURL = URL(string: url) else {return}
+//        do {
+//            let audioFile = try AVAudioFile(forReading: url)
+//            player.scheduleFile(audioFile, at: nil, completionHandler: nil)
+//            print("file is a file")
+//            print("file.fileFormat \(audioFile.fileFormat)")
+//            print("file.length \(audioFile.length)")
+//            print("file.processingFormat \(audioFile.processingFormat)")
+//            let test = AVAudioPCMBuffer(pcmFormat: audioFile.fileFormat, frameCapacity: AVAudioFrameCount(audioFile.length))
+//            try audioFile.read(into: test!)
+//            print("Test is a buffer")
+//            print("test.frameLength \(test!.frameLength)")
+//            print("test.format \(test!.format)")
+//            print("test.frameCapacity \(test!.frameCapacity)")
+//            print("test.stride \(test!.stride)")
+//            samples2.append(contentsOf: test!.array())
+//            print("aaa",samples2.count)
+//        } catch {
+//            print(error.localizedDescription)
+//        }
 
     }
     
@@ -150,19 +164,20 @@ class AudioPlayer{
             mixer.removeTap(onBus: 0)
             player.stop()
             isPlaying = false
-//            samples = []
+            //samples = []
             print("Helloo")
             return
         }
         
         //INSTALL TAP
         //mixer.volume = 0
+        var cont = 0
         mixer.installTap(onBus: 0,
                          bufferSize: AVAudioFrameCount(Constants.bufferSize),
                          format: nil)
         { [self] buffer, time in
-            if(!buffer.array().first!.isEqual(to: 0.0)) {
-                print("Hello")
+            if(!buffer.array().first!.isEqual(to: 0.0) && cont < 10) {
+                cont += 1
                 let instantaneousDBA = buffer
                     .array()
                     .applyFilter(.audible)
@@ -172,7 +187,7 @@ class AudioPlayer{
                 
                 // calculate avgDBA
                 self.samples.append(contentsOf: buffer.array())
-                self.jsonBuffer.append(contentsOf: buffer.array())
+                //self.jsonBuffer.append(contentsOf: buffer.array())
                 let avgDBA = self.samples
                     .applyFilter(.audible)
                     .calculateSoundPressureLevel()
@@ -186,25 +201,79 @@ class AudioPlayer{
                 self.maxDBA?(self.maxDBAValue )
                 
                 // Creating JSON:
-                let jsonAudio: [String: Any] = [
-                    "avgDBA": avgDBA ,
-                    "maxDBA": maxDBAV,
-                    "instDBA": instantaneousDBA
-                ]
-                
-                self.jsonArray.append(jsonAudio)
-                print("Hello")
+//                let jsonAudio: [String: Any] = [
+//                    "avgDBA": avgDBA ,
+//                    "maxDBA": maxDBAV,
+//                    "instDBA": instantaneousDBA
+//                ]
+//                
+//                self.jsonArray.append(jsonAudio)
             }
         }
+//        if(cont == 10) {
+//            player.stop()
+//            isPlaying = false
+//        }
         startEngine()
         player.play()
         isPlaying = true
     }
     func saveJson(){
-        print("samples.capacity: \(samples.count)")
+        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let url = documentURL.appendingPathComponent(audioUrl)
+        //guard let selectedSongURL = URL(string: url) else {return}
+        do {
+            let audioFile = try AVAudioFile(forReading: url)
+            //player.scheduleFile(audioFile, at: nil, completionHandler: nil)
+            print("file is a file")
+            print("file.fileFormat \(audioFile.fileFormat)")
+            print("file.length \(audioFile.length)")
+            print("file.processingFormat \(audioFile.processingFormat)")
+            let test = AVAudioPCMBuffer(pcmFormat: audioFile.fileFormat, frameCapacity: AVAudioFrameCount(2*audioFile.length))
+            try audioFile.read(into: test!)
+            print(test?.array().count)
+            self.jsonBuffer.append(contentsOf: test!.array())
+            print("Test is a buffer")
+            print("test.frameLength \(test!.frameLength)")
+            print("test.format \(test!.format)")
+            print("test.frameCapacity \(test!.frameCapacity)")
+            print("test.stride \(test!.stride)")
+            samples2.append(contentsOf: test!.array())
+            print("aaa",samples2.count)
+        } catch {
+            print(error.localizedDescription)
+        }
+        var s2: [Float] = []
+        for i in 0..<samples2.count{
+            s2.append(samples2[i])
+            let avgDBA2 = s2
+                .applyFilter(.audible)
+                .calculateSoundPressureLevel()
+            
+            let jsonAudio: [String: Any] = [
+                "avgDBA": avgDBA2
+            ]
+            self.jsonArray.append(jsonAudio)
+        }
+        
+//        for i in 0..<samples.count{
+//            s.append(samples[i])
+//            let avgDBA = s
+//                .applyFilter(.audible)
+//                .calculateSoundPressureLevel()
+////            print(samples2[i])
+//            let avgDBA2 = s2
+//                .applyFilter(.audible)
+//                .calculateSoundPressureLevel()
+//
+//            print("\(avgDBA) - \(avgDBA2)")
+//
+        //}
         print("jsonBuffer: \(jsonBuffer.count)")
         analiseAudio.bufferArrayPlay.append(contentsOf: jsonBuffer)
         AudioSave().savePlay(jsonArray: self.jsonArray)
         AudioSave().saveJsonBufferPlay(jsonBuffer: self.jsonBuffer)
     }
+    
+    
 }

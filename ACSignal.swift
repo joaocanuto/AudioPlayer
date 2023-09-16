@@ -41,7 +41,7 @@ extension ACSignal {
         }
         
         buffer.frameLength = AVAudioFrameCount(count)
-        let audioBuffer = buffer.audioBufferList.pointee.mBuffers
+        _ = buffer.audioBufferList.pointee.mBuffers
         
         // Fill the buffer with samples
         for channel in 0..<Int(format.channelCount) {

@@ -104,12 +104,13 @@ class AudioRecorder : ObservableObject {
     
     func startRecording(){
         //INSTALL TAP
+        var cnt = 0
         mixer.installTap(onBus: 0,
                          bufferSize: AVAudioFrameCount(Constants.bufferSize),
                          format: nil)
         { buffer, time in
-            if(!buffer.array().first!.isEqual(to: 0.0)) {
-                print("Hello")
+            if(!buffer.array().first!.isEqual(to: 0.0) && cnt < 10) {
+                cnt += 1
                 let instantaneousDBA = buffer
                     .array()
                     .applyFilter(.audible)
@@ -132,14 +133,12 @@ class AudioRecorder : ObservableObject {
                 
                 self.maxDBA?(self.maxDBAValue )
                 
-                // Creating JSON:
-                let jsonAudio: [String: Any] = [
-                    "avgDBA": avgDBA ,
-                    "maxDBA": maxDBAV,
-                    "instDBA": instantaneousDBA
-                ]
-                
-                self.jsonArray.append(jsonAudio)
+//                // Creating JSON:
+//                let jsonAudio: [String: Any] = [
+//                    "avgDBA": avgDBA
+//                ]
+//
+//                self.jsonArray.append(jsonAudio)
                 print("Hello")
             }
         }
@@ -154,8 +153,28 @@ class AudioRecorder : ObservableObject {
         let audioSave = AudioSave()
         print("samples.capacity: \(samples.count)")
         print("jsonBuffer: \(jsonBuffer.count)")
+//
+//        var s2: [Float] = []
+//        for i in 0..<samples.count{
+//            s2.append(samples[i])
+//            let avgDBA2 = s2
+//                .applyFilter(.audible)
+//                .calculateSoundPressureLevel()
+//
+//            let jsonAudio: [String: Any] = [
+//                "avgDBA": avgDBA2
+//            ]
+//            self.jsonArray.append(jsonAudio)
+//        }
+//
         analiseAudio.bufferArrayRec.append(contentsOf: jsonBuffer)
-        audioSave.saveRec(samples: samples, mixer: mixer,jsonArray: jsonArray)
+        //TODO: Retorno o audio ou o URL ?
+        var audioTitle:String = audioSave.saveRec(samples: samples, mixer: mixer,jsonArray: jsonArray)
+        var response = AudioPosProcessing().getData(audioTitle: audioTitle)
+        print(response.averageDB)
+        print(response.maxDB)
+        print(response.minDB)
+        print(response.maxDB)
         audioSave.saveJsonBufferRec(jsonBuffer: jsonBuffer)
     }
 }

@@ -17,6 +17,8 @@
 		EF99FC3E2A8D7EBF00E5D34B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF99FC3D2A8D7EBF00E5D34B /* ContentView.swift */; };
 		EF99FC402A8D7EC000E5D34B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF99FC3F2A8D7EC000E5D34B /* Assets.xcassets */; };
 		EF99FC432A8D7EC000E5D34B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF99FC422A8D7EC000E5D34B /* Preview Assets.xcassets */; };
+		EFCEF8002AB3BC36008D003D /* AudioDataCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCEF7FF2AB3BC36008D003D /* AudioDataCore.swift */; };
+		EFCEF8022AB3BCD5008D003D /* AudioPosProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCEF8012AB3BCD5008D003D /* AudioPosProcessing.swift */; };
 		EFE9FEE42A8EE8D2009B1282 /* AudioPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9FEE32A8EE8D2009B1282 /* AudioPlayerView.swift */; };
 		EFE9FEE62A8EE8DF009B1282 /* AudioRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9FEE52A8EE8DF009B1282 /* AudioRecorderView.swift */; };
 		EFE9FEE82A8EF20E009B1282 /* AudioRecPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE9FEE72A8EF20E009B1282 /* AudioRecPlayView.swift */; };
@@ -46,6 +48,8 @@
 		EF99FC3D2A8D7EBF00E5D34B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EF99FC3F2A8D7EC000E5D34B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF99FC422A8D7EC000E5D34B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EFCEF7FF2AB3BC36008D003D /* AudioDataCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioDataCore.swift; sourceTree = "<group>"; };
+		EFCEF8012AB3BCD5008D003D /* AudioPosProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPosProcessing.swift; sourceTree = "<group>"; };
 		EFE9FEE32A8EE8D2009B1282 /* AudioPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerView.swift; sourceTree = "<group>"; };
 		EFE9FEE52A8EE8DF009B1282 /* AudioRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderView.swift; sourceTree = "<group>"; };
 		EFE9FEE72A8EF20E009B1282 /* AudioRecPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecPlayView.swift; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 			children = (
 				EF0851692AA68FF6004E2299 /* Persistence.swift */,
 				EF08516B2AA69021004E2299 /* AudioModel.swift */,
+				EFCEF7FF2AB3BC36008D003D /* AudioDataCore.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -144,6 +149,7 @@
 				EFE9FEF82A942130009B1282 /* AudioPlayer.swift */,
 				EFE9FEEB2A8EF2FA009B1282 /* AudioRecPlay.swift */,
 				EF0851602AA68F3F004E2299 /* AudioListViewModel.swift */,
+				EFCEF8012AB3BCD5008D003D /* AudioPosProcessing.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -259,7 +265,9 @@
 				EFE9FEE82A8EF20E009B1282 /* AudioRecPlayView.swift in Sources */,
 				EFE9FEE42A8EE8D2009B1282 /* AudioPlayerView.swift in Sources */,
 				EFE9FF0C2A957397009B1282 /* AnaliseAudio.swift in Sources */,
+				EFCEF8002AB3BC36008D003D /* AudioDataCore.swift in Sources */,
 				EFE9FEE62A8EE8DF009B1282 /* AudioRecorderView.swift in Sources */,
+				EFCEF8022AB3BCD5008D003D /* AudioPosProcessing.swift in Sources */,
 				EFE9FEEC2A8EF2FA009B1282 /* AudioRecPlay.swift in Sources */,
 				EFE9FF042A942647009B1282 /* Constants.swift in Sources */,
 				EF08516F2AA69099004E2299 /* CoredataServices.swift in Sources */,
